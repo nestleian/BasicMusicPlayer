@@ -395,7 +395,7 @@ namespace MusicPlayerAttempt
                 //Get album art from folder.
                 albumArtInFolder = Directory.GetFiles(folderMusicBrowser.SelectedPath, "*.jpg").ToList<string>();
                 //If there is album art, set that as the album art path.
-                if (albumArtInFolder[0] != "")
+                if (albumArtInFolder.Count >= 1)
                 {
                     for (int i = artStart; i < playlist.Count; i++)
                     {
@@ -427,8 +427,11 @@ namespace MusicPlayerAttempt
             {
                 albumArtBox.ImageLocation = playlist[currentlyPlayingTrackNumber].artPath;
             }
-            Image image = Image.FromFile(playlist[currentlyPlayingTrackNumber].artPath);
-            albumArtBox.Image = image;
+            else
+            {
+                Image image = Image.FromFile(playlist[currentlyPlayingTrackNumber].artPath);
+                albumArtBox.Image = image;
+            }
         }
 
         private void setLabels(int index)
